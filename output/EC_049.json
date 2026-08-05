@@ -4,7 +4,7 @@
     "primary_issue": "unsupported_late_claim",
     "secondary_issues": [],
     "case_status": "no_action",
-    "confidence": 0.95
+    "confidence": 0.7
   },
   "affected_entities": {
     "order_ids": [
@@ -72,6 +72,7 @@
     "order:34513ce0c4fab462a55830c0989c7edb",
     "item:34513ce0c4fab462a55830c0989c7edb:1",
     "payment:34513ce0c4fab462a55830c0989c7edb:1",
+    "seller:87142160b41353c4e5fca2360caf6f92",
     "policy:DELIVERY_WITHIN_ESTIMATE"
   ],
   "financial_resolution": {

@@ -78,13 +78,13 @@ class PolicyEngine:
         secondary_issues = []
         if len(items) >= 2:
             secondary_issues.append('multi_item_order')
-        if len(set(seller_ids)) >= 2:
+        if len(seller_ids) >= 2:
             secondary_issues.append('multi_seller_order')
         if len(payments) >= 2:
             secondary_issues.append('split_payment')
-        if len(related_orders) >= 1:
+        if len(related_orders) > 0:
             secondary_issues.append('repeat_customer')
-        if len(set(category_names)) >= 2:
+        if len(category_names) >= 2:
             secondary_issues.append('multiple_categories')
 
         # Additional actions
@@ -108,11 +108,17 @@ class PolicyEngine:
             evidence_ids.append(f"item:{it_id}")
         for pmt_id in ctx['payment_ids']:
             evidence_ids.append(f"payment:{pmt_id}")
-        for rp in responsible_parties:
-            if rp['party_type'] == 'seller':
-                evidence_ids.append(f"seller:{rp['party_id']}")
+        for s_id in ctx['seller_ids']:
+            evidence_ids.append(f"seller:{s_id}")
         if root_cause_code:
             evidence_ids.append(f"policy:{root_cause_code}")
+
+        # Dynamic confidence calculation
+        confidence = 0.95
+        if primary_issue == 'unsupported_late_claim':
+            confidence = 0.7
+        elif len(late_sellers) > 0 or order_status in ['canceled', 'unavailable']:
+            confidence = 0.98
 
         # Assemble Output Schema according to strict rules
         output_schema = {
@@ -121,10 +127,10 @@ class PolicyEngine:
                 "primary_issue": primary_issue,
                 "secondary_issues": secondary_issues,
                 "case_status": case_status,
-                "confidence": 0.95
+                "confidence": confidence
             },
             "affected_entities": {
-                "order_ids": [oid][:5],
+                "order_ids": [oid],
                 "item_ids": ctx['item_ids'][:5],
                 "seller_ids": ctx['seller_ids'][:3],
                 "payment_ids": ctx['payment_ids'][:5]

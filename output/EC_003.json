@@ -6,7 +6,7 @@
       "split_payment"
     ],
     "case_status": "action_required",
-    "confidence": 0.95
+    "confidence": 0.98
   },
   "affected_entities": {
     "order_ids": [
@@ -82,6 +82,7 @@
     "item:3a129877493c8189c59c60eb71d97c29:1",
     "payment:3a129877493c8189c59c60eb71d97c29:1",
     "payment:3a129877493c8189c59c60eb71d97c29:2",
+    "seller:3fd1e727ba94cfe122d165e176ce7967",
     "policy:ORDER_CANCELED_AFTER_PAYMENT"
   ],
   "financial_resolution": {

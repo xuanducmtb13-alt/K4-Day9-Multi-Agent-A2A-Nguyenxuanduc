@@ -4,7 +4,7 @@
     "primary_issue": "unsupported_late_claim",
     "secondary_issues": [],
     "case_status": "no_action",
-    "confidence": 0.95
+    "confidence": 0.7
   },
   "affected_entities": {
     "order_ids": [
@@ -72,6 +72,7 @@
     "order:76c6e866289321a7c93b82b54852dc33",
     "item:76c6e866289321a7c93b82b54852dc33:1",
     "payment:76c6e866289321a7c93b82b54852dc33:1",
+    "seller:63b9ae557efed31d1f7687917d248a8d",
     "policy:DELIVERY_WITHIN_ESTIMATE"
   ],
   "financial_resolution": {
