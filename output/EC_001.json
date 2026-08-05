@@ -1,47 +1,54 @@
 {
   "case_id": "EC_001",
   "case_assessment": {
-    "primary_issue": "canceled_order_paid",
-    "secondary_issues": [],
-    "case_status": "action_required",
-    "confidence": 0.99
+    "primary_issue": "unsupported_late_claim",
+    "secondary_issues": [
+      "multi_item_order",
+      "repeat_customer"
+    ],
+    "case_status": "no_action",
+    "confidence": 0.8
   },
   "affected_entities": {
     "order_ids": [
-      "1b9ecfe83cdc259250e1a8aca174f0ad"
+      "9b75cdaf2d85857ef023980e15d01546"
     ],
     "item_ids": [
-      "1b9ecfe83cdc259250e1a8aca174f0ad:1"
+      "9b75cdaf2d85857ef023980e15d01546:1",
+      "9b75cdaf2d85857ef023980e15d01546:2"
     ],
     "seller_ids": [
-      "9646c3513289980f17226a2fc4720dbd"
+      "c70c1b0d8ca86052f45a432a38b73958"
     ],
     "payment_ids": [
-      "1b9ecfe83cdc259250e1a8aca174f0ad:1"
+      "9b75cdaf2d85857ef023980e15d01546:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "8ea097b1824dbd4d17af71b0afe04301",
-    "related_order_ids": []
+    "customer_unique_id": "bbf65e7823171a84e70a495dd6c34ceb",
+    "related_order_ids": [
+      "65bbd0719855fe808bb19f62dfa9f42c"
+    ]
   },
   "product_context": {
     "product_ids": [
-      "ad673c1cd02b966e931f9db4fdc34791"
+      "0a4f9f421af66d2ea061fbb8883419f7",
+      "43b54d1fc56ff394092a3dff6be2d39f"
     ],
     "category_names": [
-      "computers_accessories"
+      "health_beauty"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": null,
-    "estimated_delivery_at": "2018-08-14 00:00:00",
-    "carrier_handoff_at": null,
-    "delivery_variance_hours": null,
+    "delivered_at": "2018-06-19 01:28:42",
+    "estimated_delivery_at": "2018-06-26 00:00:00",
+    "carrier_handoff_at": "2018-06-15 14:15:00",
+    "delivery_variance_hours": -166.52,
     "seller_handoff_analysis": [
       {
-        "seller_id": "9646c3513289980f17226a2fc4720dbd",
-        "shipping_limit_at": "2018-08-14 04:10:26",
-        "handoff_variance_hours": null,
+        "seller_id": "c70c1b0d8ca86052f45a432a38b73958",
+        "shipping_limit_at": "2018-06-18 07:57:36",
+        "handoff_variance_hours": -65.71,
         "late_handoff": false
       }
     ],
@@ -49,43 +56,38 @@
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 25.0,
-    "freight_total_brl": 8.34,
-    "expected_total_brl": 33.34,
-    "payment_total_brl": 33.34,
+    "item_total_brl": 220.64,
+    "freight_total_brl": 16.7,
+    "expected_total_brl": 237.34,
+    "payment_total_brl": 237.34,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
-      "boleto"
+      "credit_card"
     ]
   },
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "ORDER_CANCELED_AFTER_PAYMENT",
+        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
         "rank": 1
       }
     ],
-    "responsible_parties": [
-      {
-        "party_type": "platform",
-        "party_id": "OLIST_PLATFORM"
-      }
-    ]
+    "responsible_parties": []
   },
   "evidence_ids": [
-    "order:1b9ecfe83cdc259250e1a8aca174f0ad",
-    "item:1b9ecfe83cdc259250e1a8aca174f0ad:1",
-    "payment:1b9ecfe83cdc259250e1a8aca174f0ad:1",
-    "seller:9646c3513289980f17226a2fc4720dbd",
-    "policy:ORDER_CANCELED_AFTER_PAYMENT"
+    "order:9b75cdaf2d85857ef023980e15d01546",
+    "item:9b75cdaf2d85857ef023980e15d01546:1",
+    "item:9b75cdaf2d85857ef023980e15d01546:2",
+    "payment:9b75cdaf2d85857ef023980e15d01546:1",
+    "seller:c70c1b0d8ca86052f45a432a38b73958",
+    "policy:DELIVERY_WITHIN_ESTIMATE"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 33.34
+    "recommended_refund_brl": 0.0
   },
   "resolution_actions": [
-    "issue_full_refund",
-    "verify_refund_completion"
+    "reject_late_refund"
   ]
 }

@@ -1,90 +1,78 @@
 {
   "case_id": "EC_034",
   "case_assessment": {
-    "primary_issue": "valid_split_payment",
+    "primary_issue": "unavailable_order_paid",
     "secondary_issues": [
-      "split_payment"
+      "repeat_customer"
     ],
-    "case_status": "no_action",
-    "confidence": 0.93
+    "case_status": "action_required",
+    "confidence": 0.99
   },
   "affected_entities": {
     "order_ids": [
-      "634e8f4c0f6744a626f77f39770ac6aa"
+      "b210c676cae65f95f7e08a49d195e1a1"
     ],
-    "item_ids": [
-      "634e8f4c0f6744a626f77f39770ac6aa:1"
-    ],
-    "seller_ids": [
-      "744dac408745240a2c2528fb1b6028f3"
-    ],
+    "item_ids": [],
+    "seller_ids": [],
     "payment_ids": [
-      "634e8f4c0f6744a626f77f39770ac6aa:2",
-      "634e8f4c0f6744a626f77f39770ac6aa:1"
+      "b210c676cae65f95f7e08a49d195e1a1:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "5229b8e4d7d2b9b676c2083c17b1ecd0",
-    "related_order_ids": []
-  },
-  "product_context": {
-    "product_ids": [
-      "69d980b4120a76616d7b237d731d6156"
-    ],
-    "category_names": [
-      "watches_gifts"
+    "customer_unique_id": "ec9c7ebb2a345ccd42c46b94ecb4d319",
+    "related_order_ids": [
+      "0b1e73fa546894ad7310916b480de067"
     ]
   },
+  "product_context": {
+    "product_ids": [],
+    "category_names": []
+  },
   "delivery_analysis": {
-    "delivered_at": "2017-08-16 18:17:54",
-    "estimated_delivery_at": "2017-08-31 00:00:00",
-    "carrier_handoff_at": "2017-08-10 20:21:53",
-    "delivery_variance_hours": -341.7,
-    "seller_handoff_analysis": [
-      {
-        "seller_id": "744dac408745240a2c2528fb1b6028f3",
-        "shipping_limit_at": "2017-08-15 18:45:18",
-        "handoff_variance_hours": -118.39,
-        "late_handoff": false
-      }
-    ],
+    "delivered_at": null,
+    "estimated_delivery_at": "2017-08-16 00:00:00",
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": null,
+    "seller_handoff_analysis": [],
     "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 219.0,
-    "freight_total_brl": 15.28,
-    "expected_total_brl": 234.28,
-    "payment_total_brl": 234.28,
-    "difference_brl": 0.0,
-    "reconciled": true,
+    "item_total_brl": 0,
+    "freight_total_brl": 0,
+    "expected_total_brl": null,
+    "payment_total_brl": 85.14,
+    "difference_brl": null,
+    "reconciled": null,
     "payment_types": [
-      "voucher",
       "credit_card"
     ]
   },
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "MULTIPLE_PAYMENTS_RECONCILED",
+        "cause_code": "ORDER_UNAVAILABLE_AFTER_PAYMENT",
         "rank": 1
       }
     ],
-    "responsible_parties": []
+    "responsible_parties": [
+      {
+        "party_type": "platform",
+        "party_id": "OLIST_PLATFORM"
+      }
+    ]
   },
   "evidence_ids": [
-    "order:634e8f4c0f6744a626f77f39770ac6aa",
-    "item:634e8f4c0f6744a626f77f39770ac6aa:1",
-    "payment:634e8f4c0f6744a626f77f39770ac6aa:2",
-    "payment:634e8f4c0f6744a626f77f39770ac6aa:1",
-    "seller:744dac408745240a2c2528fb1b6028f3",
-    "policy:MULTIPLE_PAYMENTS_RECONCILED"
+    "order:b210c676cae65f95f7e08a49d195e1a1",
+    "payment:b210c676cae65f95f7e08a49d195e1a1:1",
+    "policy:ORDER_UNAVAILABLE_AFTER_PAYMENT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 85.14
   },
   "resolution_actions": [
-    "explain_valid_split_payment"
+    "issue_full_refund",
+    "verify_refund_completion"
   ]
 }

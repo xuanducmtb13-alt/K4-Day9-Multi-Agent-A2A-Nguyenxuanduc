@@ -1,60 +1,63 @@
 {
   "case_id": "EC_011",
   "case_assessment": {
-    "primary_issue": "late_delivery_seller",
-    "secondary_issues": [],
+    "primary_issue": "canceled_order_paid",
+    "secondary_issues": [
+      "multi_item_order"
+    ],
     "case_status": "action_required",
-    "confidence": 0.97
+    "confidence": 0.99
   },
   "affected_entities": {
     "order_ids": [
-      "203096f03d82e0dffbc41ebc2e2bcfb7"
+      "113e41a438f06ffae6d1857e01d60c45"
     ],
     "item_ids": [
-      "203096f03d82e0dffbc41ebc2e2bcfb7:1"
+      "113e41a438f06ffae6d1857e01d60c45:1",
+      "113e41a438f06ffae6d1857e01d60c45:2",
+      "113e41a438f06ffae6d1857e01d60c45:3",
+      "113e41a438f06ffae6d1857e01d60c45:4"
     ],
     "seller_ids": [
-      "633ecdf879b94b5337cca303328e4a25"
+      "bcf5566870987da7bc811fbc8c5b9fd9"
     ],
     "payment_ids": [
-      "203096f03d82e0dffbc41ebc2e2bcfb7:1"
+      "113e41a438f06ffae6d1857e01d60c45:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "d699688533772c15a061e8ce81cb56df",
+    "customer_unique_id": "1871aa277cbcefacecbf979fb6888b7f",
     "related_order_ids": []
   },
   "product_context": {
     "product_ids": [
-      "5ac9d9e379c606e36a8094a6046f75dc"
+      "59c6d60f81179f563785a48de25532b9"
     ],
     "category_names": [
-      "health_beauty"
+      "musical_instruments"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2017-10-09 22:23:46",
-    "estimated_delivery_at": "2017-09-28 00:00:00",
-    "carrier_handoff_at": "2017-10-06 17:50:03",
-    "delivery_variance_hours": 286.4,
+    "delivered_at": null,
+    "estimated_delivery_at": "2017-08-24 00:00:00",
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": null,
     "seller_handoff_analysis": [
       {
-        "seller_id": "633ecdf879b94b5337cca303328e4a25",
-        "shipping_limit_at": "2017-09-25 04:04:09",
-        "handoff_variance_hours": 277.76,
-        "late_handoff": true
+        "seller_id": "bcf5566870987da7bc811fbc8c5b9fd9",
+        "shipping_limit_at": "2017-08-18 04:25:38",
+        "handoff_variance_hours": null,
+        "late_handoff": false
       }
     ],
-    "late_handoff_seller_ids": [
-      "633ecdf879b94b5337cca303328e4a25"
-    ]
+    "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 109.9,
-    "freight_total_brl": 8.96,
-    "expected_total_brl": 118.86,
-    "payment_total_brl": 118.86,
+    "item_total_brl": 96.0,
+    "freight_total_brl": 31.12,
+    "expected_total_brl": 127.12,
+    "payment_total_brl": 127.12,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
@@ -64,31 +67,33 @@
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "SELLER_HANDOFF_AFTER_LIMIT",
+        "cause_code": "ORDER_CANCELED_AFTER_PAYMENT",
         "rank": 1
       }
     ],
     "responsible_parties": [
       {
-        "party_type": "seller",
-        "party_id": "633ecdf879b94b5337cca303328e4a25"
+        "party_type": "platform",
+        "party_id": "OLIST_PLATFORM"
       }
     ]
   },
   "evidence_ids": [
-    "order:203096f03d82e0dffbc41ebc2e2bcfb7",
-    "item:203096f03d82e0dffbc41ebc2e2bcfb7:1",
-    "payment:203096f03d82e0dffbc41ebc2e2bcfb7:1",
-    "seller:633ecdf879b94b5337cca303328e4a25",
-    "policy:SELLER_HANDOFF_AFTER_LIMIT"
+    "order:113e41a438f06ffae6d1857e01d60c45",
+    "item:113e41a438f06ffae6d1857e01d60c45:1",
+    "item:113e41a438f06ffae6d1857e01d60c45:2",
+    "item:113e41a438f06ffae6d1857e01d60c45:3",
+    "item:113e41a438f06ffae6d1857e01d60c45:4",
+    "payment:113e41a438f06ffae6d1857e01d60c45:1",
+    "seller:bcf5566870987da7bc811fbc8c5b9fd9",
+    "policy:ORDER_CANCELED_AFTER_PAYMENT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 8.96
+    "recommended_refund_brl": 127.12
   },
   "resolution_actions": [
-    "refund_freight",
-    "review_seller_handoff",
+    "issue_full_refund",
     "verify_refund_completion"
   ]
 }

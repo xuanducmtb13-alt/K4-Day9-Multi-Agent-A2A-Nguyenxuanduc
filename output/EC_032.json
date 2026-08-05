@@ -1,90 +1,101 @@
 {
   "case_id": "EC_032",
   "case_assessment": {
-    "primary_issue": "valid_split_payment",
+    "primary_issue": "late_delivery_seller",
     "secondary_issues": [
-      "split_payment"
+      "multi_item_order",
+      "multiple_categories"
     ],
-    "case_status": "no_action",
-    "confidence": 0.93
+    "case_status": "action_required",
+    "confidence": 0.97
   },
   "affected_entities": {
     "order_ids": [
-      "e69bfb5eb88e0ed6a785585b27e16dbf"
+      "d3782eb2976abf986175941c51364aab"
     ],
     "item_ids": [
-      "e69bfb5eb88e0ed6a785585b27e16dbf:1"
+      "d3782eb2976abf986175941c51364aab:1",
+      "d3782eb2976abf986175941c51364aab:2"
     ],
     "seller_ids": [
-      "7c67e1448b00f6e969d365cea6b010ab"
+      "76d5af76d0271110f9af36c92573f765"
     ],
     "payment_ids": [
-      "e69bfb5eb88e0ed6a785585b27e16dbf:2",
-      "e69bfb5eb88e0ed6a785585b27e16dbf:1"
+      "d3782eb2976abf986175941c51364aab:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "299905e3934e9e181bfb2e164dd4b4f8",
+    "customer_unique_id": "94431ab24129f0060b53a89cfd62462f",
     "related_order_ids": []
   },
   "product_context": {
     "product_ids": [
-      "9a78fb9862b10749a117f7fc3c31f051"
+      "a7906a8a69acf5b0cb256882e741896a",
+      "197f7d1d3a8b0bf0c8f0394ff71b574b"
     ],
     "category_names": [
-      "office_furniture"
+      "sports_leisure",
+      "construction_tools_lights"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2017-08-16 17:14:30",
-    "estimated_delivery_at": "2017-08-23 00:00:00",
-    "carrier_handoff_at": "2017-08-10 19:45:24",
-    "delivery_variance_hours": -150.76,
+    "delivered_at": "2018-01-02 12:18:43",
+    "estimated_delivery_at": "2017-12-29 00:00:00",
+    "carrier_handoff_at": "2017-12-20 21:13:05",
+    "delivery_variance_hours": 108.31,
     "seller_handoff_analysis": [
       {
-        "seller_id": "7c67e1448b00f6e969d365cea6b010ab",
-        "shipping_limit_at": "2017-08-11 12:05:32",
-        "handoff_variance_hours": -16.34,
-        "late_handoff": false
+        "seller_id": "76d5af76d0271110f9af36c92573f765",
+        "shipping_limit_at": "2017-12-12 21:52:51",
+        "handoff_variance_hours": 191.34,
+        "late_handoff": true
       }
     ],
-    "late_handoff_seller_ids": []
+    "late_handoff_seller_ids": [
+      "76d5af76d0271110f9af36c92573f765"
+    ]
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 149.99,
-    "freight_total_brl": 19.77,
-    "expected_total_brl": 169.76,
-    "payment_total_brl": 169.76,
+    "item_total_brl": 1017.0,
+    "freight_total_brl": 31.64,
+    "expected_total_brl": 1048.64,
+    "payment_total_brl": 1048.64,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
-      "voucher",
       "credit_card"
     ]
   },
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "MULTIPLE_PAYMENTS_RECONCILED",
+        "cause_code": "SELLER_HANDOFF_AFTER_LIMIT",
         "rank": 1
       }
     ],
-    "responsible_parties": []
+    "responsible_parties": [
+      {
+        "party_type": "seller",
+        "party_id": "76d5af76d0271110f9af36c92573f765"
+      }
+    ]
   },
   "evidence_ids": [
-    "order:e69bfb5eb88e0ed6a785585b27e16dbf",
-    "item:e69bfb5eb88e0ed6a785585b27e16dbf:1",
-    "payment:e69bfb5eb88e0ed6a785585b27e16dbf:2",
-    "payment:e69bfb5eb88e0ed6a785585b27e16dbf:1",
-    "seller:7c67e1448b00f6e969d365cea6b010ab",
-    "policy:MULTIPLE_PAYMENTS_RECONCILED"
+    "order:d3782eb2976abf986175941c51364aab",
+    "item:d3782eb2976abf986175941c51364aab:1",
+    "item:d3782eb2976abf986175941c51364aab:2",
+    "payment:d3782eb2976abf986175941c51364aab:1",
+    "seller:76d5af76d0271110f9af36c92573f765",
+    "policy:SELLER_HANDOFF_AFTER_LIMIT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 31.64
   },
   "resolution_actions": [
-    "explain_valid_split_payment"
+    "refund_freight",
+    "review_seller_handoff",
+    "verify_refund_completion"
   ]
 }

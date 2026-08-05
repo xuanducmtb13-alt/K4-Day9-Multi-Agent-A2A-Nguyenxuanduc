@@ -1,90 +1,78 @@
 {
   "case_id": "EC_035",
   "case_assessment": {
-    "primary_issue": "valid_split_payment",
+    "primary_issue": "unavailable_order_paid",
     "secondary_issues": [
-      "split_payment"
+      "repeat_customer"
     ],
-    "case_status": "no_action",
-    "confidence": 0.93
+    "case_status": "action_required",
+    "confidence": 0.99
   },
   "affected_entities": {
     "order_ids": [
-      "f7959f8385f34c4f645327465a1c9fc4"
+      "ae443cb420061bab1f2c5e3ad279fde8"
     ],
-    "item_ids": [
-      "f7959f8385f34c4f645327465a1c9fc4:1"
-    ],
-    "seller_ids": [
-      "dc4a0fc896dc34b0d5bfec8438291c80"
-    ],
+    "item_ids": [],
+    "seller_ids": [],
     "payment_ids": [
-      "f7959f8385f34c4f645327465a1c9fc4:2",
-      "f7959f8385f34c4f645327465a1c9fc4:1"
+      "ae443cb420061bab1f2c5e3ad279fde8:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "5ddb4fdd9cef2450d17ae20639815885",
-    "related_order_ids": []
-  },
-  "product_context": {
-    "product_ids": [
-      "c1234c80dafde7ef3311b3eabd5069ed"
-    ],
-    "category_names": [
-      "bed_bath_table"
+    "customer_unique_id": "6e14116d3471123fcf057c203fd7e801",
+    "related_order_ids": [
+      "f442020e13b718d40746ce039d97b4c2"
     ]
   },
+  "product_context": {
+    "product_ids": [],
+    "category_names": []
+  },
   "delivery_analysis": {
-    "delivered_at": "2017-04-10 02:59:52",
-    "estimated_delivery_at": "2017-04-26 00:00:00",
-    "carrier_handoff_at": "2017-03-30 10:55:54",
-    "delivery_variance_hours": -381.0,
-    "seller_handoff_analysis": [
-      {
-        "seller_id": "dc4a0fc896dc34b0d5bfec8438291c80",
-        "shipping_limit_at": "2017-04-11 08:05:08",
-        "handoff_variance_hours": -285.15,
-        "late_handoff": false
-      }
-    ],
+    "delivered_at": null,
+    "estimated_delivery_at": "2018-03-28 00:00:00",
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": null,
+    "seller_handoff_analysis": [],
     "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 17.9,
-    "freight_total_brl": 10.96,
-    "expected_total_brl": 28.86,
-    "payment_total_brl": 28.86,
-    "difference_brl": 0.0,
-    "reconciled": true,
+    "item_total_brl": 0,
+    "freight_total_brl": 0,
+    "expected_total_brl": null,
+    "payment_total_brl": 132.37,
+    "difference_brl": null,
+    "reconciled": null,
     "payment_types": [
-      "voucher",
       "credit_card"
     ]
   },
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "MULTIPLE_PAYMENTS_RECONCILED",
+        "cause_code": "ORDER_UNAVAILABLE_AFTER_PAYMENT",
         "rank": 1
       }
     ],
-    "responsible_parties": []
+    "responsible_parties": [
+      {
+        "party_type": "platform",
+        "party_id": "OLIST_PLATFORM"
+      }
+    ]
   },
   "evidence_ids": [
-    "order:f7959f8385f34c4f645327465a1c9fc4",
-    "item:f7959f8385f34c4f645327465a1c9fc4:1",
-    "payment:f7959f8385f34c4f645327465a1c9fc4:2",
-    "payment:f7959f8385f34c4f645327465a1c9fc4:1",
-    "seller:dc4a0fc896dc34b0d5bfec8438291c80",
-    "policy:MULTIPLE_PAYMENTS_RECONCILED"
+    "order:ae443cb420061bab1f2c5e3ad279fde8",
+    "payment:ae443cb420061bab1f2c5e3ad279fde8:1",
+    "policy:ORDER_UNAVAILABLE_AFTER_PAYMENT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 0.0
+    "recommended_refund_brl": 132.37
   },
   "resolution_actions": [
-    "explain_valid_split_payment"
+    "issue_full_refund",
+    "verify_refund_completion"
   ]
 }

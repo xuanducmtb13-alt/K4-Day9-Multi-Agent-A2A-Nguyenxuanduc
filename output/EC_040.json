@@ -3,48 +3,51 @@
   "case_assessment": {
     "primary_issue": "late_delivery_logistics",
     "secondary_issues": [
-      "split_payment"
+      "multi_item_order",
+      "multiple_categories"
     ],
     "case_status": "action_required",
     "confidence": 0.97
   },
   "affected_entities": {
     "order_ids": [
-      "f31535f21d145b2345e2bf7f09d62322"
+      "992cbe3e064cd39f9ccde60a29ffcd3c"
     ],
     "item_ids": [
-      "f31535f21d145b2345e2bf7f09d62322:1"
+      "992cbe3e064cd39f9ccde60a29ffcd3c:1",
+      "992cbe3e064cd39f9ccde60a29ffcd3c:2"
     ],
     "seller_ids": [
-      "91f0eec23d4a61d7d7caeefa3f0ad1ca"
+      "5b581417df4480f632484ba681e53944"
     ],
     "payment_ids": [
-      "f31535f21d145b2345e2bf7f09d62322:2",
-      "f31535f21d145b2345e2bf7f09d62322:1"
+      "992cbe3e064cd39f9ccde60a29ffcd3c:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "51ac8560948d44d4ffa33f2680569a20",
+    "customer_unique_id": "16534282c820ca754b8de47754bb6d1a",
     "related_order_ids": []
   },
   "product_context": {
     "product_ids": [
-      "f196248e8b5d060cca414a664ea9a76f"
+      "fe4dece0c663ba4f1f9f2d04d3b93a97",
+      "db7e6804f1a8206a7e51c9a741a09d9e"
     ],
     "category_names": [
-      "auto"
+      "cool_stuff",
+      "toys"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2018-04-23 15:49:34",
-    "estimated_delivery_at": "2018-03-05 00:00:00",
-    "carrier_handoff_at": "2018-02-02 00:24:34",
-    "delivery_variance_hours": 1191.83,
+    "delivered_at": "2018-02-26 21:22:10",
+    "estimated_delivery_at": "2018-02-09 00:00:00",
+    "carrier_handoff_at": "2018-01-18 19:13:36",
+    "delivery_variance_hours": 429.37,
     "seller_handoff_analysis": [
       {
-        "seller_id": "91f0eec23d4a61d7d7caeefa3f0ad1ca",
-        "shipping_limit_at": "2018-02-08 08:10:31",
-        "handoff_variance_hours": -151.77,
+        "seller_id": "5b581417df4480f632484ba681e53944",
+        "shipping_limit_at": "2018-01-22 21:11:44",
+        "handoff_variance_hours": -97.97,
         "late_handoff": false
       }
     ],
@@ -52,15 +55,14 @@
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 199.0,
-    "freight_total_brl": 24.26,
-    "expected_total_brl": 223.26,
-    "payment_total_brl": 223.26,
+    "item_total_brl": 288.9,
+    "freight_total_brl": 75.98,
+    "expected_total_brl": 364.88,
+    "payment_total_brl": 364.88,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
-      "voucher",
-      "credit_card"
+      "boleto"
     ]
   },
   "root_cause_analysis": {
@@ -78,21 +80,20 @@
     ]
   },
   "evidence_ids": [
-    "order:f31535f21d145b2345e2bf7f09d62322",
-    "item:f31535f21d145b2345e2bf7f09d62322:1",
-    "payment:f31535f21d145b2345e2bf7f09d62322:2",
-    "payment:f31535f21d145b2345e2bf7f09d62322:1",
-    "seller:91f0eec23d4a61d7d7caeefa3f0ad1ca",
+    "order:992cbe3e064cd39f9ccde60a29ffcd3c",
+    "item:992cbe3e064cd39f9ccde60a29ffcd3c:1",
+    "item:992cbe3e064cd39f9ccde60a29ffcd3c:2",
+    "payment:992cbe3e064cd39f9ccde60a29ffcd3c:1",
+    "seller:5b581417df4480f632484ba681e53944",
     "policy:CARRIER_DELIVERED_AFTER_ESTIMATE"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 24.26
+    "recommended_refund_brl": 75.98
   },
   "resolution_actions": [
     "refund_freight",
     "review_carrier_delay",
-    "verify_refund_completion",
-    "verify_payment_allocation"
+    "verify_refund_completion"
   ]
 }

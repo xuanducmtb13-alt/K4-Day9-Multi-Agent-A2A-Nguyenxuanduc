@@ -1,47 +1,50 @@
 {
   "case_id": "EC_030",
   "case_assessment": {
-    "primary_issue": "late_delivery_logistics",
-    "secondary_issues": [],
+    "primary_issue": "canceled_order_paid",
+    "secondary_issues": [
+      "multi_item_order"
+    ],
     "case_status": "action_required",
-    "confidence": 0.9
+    "confidence": 0.99
   },
   "affected_entities": {
     "order_ids": [
-      "c82a457d646f77c8f151e12a3e517ed2"
+      "676e40056867189a1b3599f3e646f421"
     ],
     "item_ids": [
-      "c82a457d646f77c8f151e12a3e517ed2:1"
+      "676e40056867189a1b3599f3e646f421:1",
+      "676e40056867189a1b3599f3e646f421:2"
     ],
     "seller_ids": [
-      "d9bd94811c3338dceb4181f3dbc0c73e"
+      "38e679b9e0064cd94c6f035707344dae"
     ],
     "payment_ids": [
-      "c82a457d646f77c8f151e12a3e517ed2:1"
+      "676e40056867189a1b3599f3e646f421:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "d76441ab4a22e389561144ffafdaa19c",
+    "customer_unique_id": "0e627c648d467c22ca73b5e9c4040167",
     "related_order_ids": []
   },
   "product_context": {
     "product_ids": [
-      "81a3f1e46ec16acb4800a5002b014438"
+      "30a6a74ad9391b95bfc088f875ce8cfc"
     ],
     "category_names": [
-      "perfumery"
+      "sports_leisure"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2018-08-15 15:02:09",
-    "estimated_delivery_at": "2018-08-15 00:00:00",
-    "carrier_handoff_at": "2018-08-10 17:10:00",
-    "delivery_variance_hours": 15.04,
+    "delivered_at": null,
+    "estimated_delivery_at": "2017-05-03 00:00:00",
+    "carrier_handoff_at": null,
+    "delivery_variance_hours": null,
     "seller_handoff_analysis": [
       {
-        "seller_id": "d9bd94811c3338dceb4181f3dbc0c73e",
-        "shipping_limit_at": "2018-08-12 21:25:20",
-        "handoff_variance_hours": -52.26,
+        "seller_id": "38e679b9e0064cd94c6f035707344dae",
+        "shipping_limit_at": "2017-04-12 21:25:08",
+        "handoff_variance_hours": null,
         "late_handoff": false
       }
     ],
@@ -49,10 +52,10 @@
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 136.78,
-    "freight_total_brl": 8.22,
-    "expected_total_brl": 145.0,
-    "payment_total_brl": 145.0,
+    "item_total_brl": 50.36,
+    "freight_total_brl": 31.12,
+    "expected_total_brl": 81.48,
+    "payment_total_brl": 81.48,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
@@ -62,31 +65,31 @@
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "CARRIER_DELIVERED_AFTER_ESTIMATE",
+        "cause_code": "ORDER_CANCELED_AFTER_PAYMENT",
         "rank": 1
       }
     ],
     "responsible_parties": [
       {
-        "party_type": "logistics_provider",
-        "party_id": "LOGISTICS_PROVIDER"
+        "party_type": "platform",
+        "party_id": "OLIST_PLATFORM"
       }
     ]
   },
   "evidence_ids": [
-    "order:c82a457d646f77c8f151e12a3e517ed2",
-    "item:c82a457d646f77c8f151e12a3e517ed2:1",
-    "payment:c82a457d646f77c8f151e12a3e517ed2:1",
-    "seller:d9bd94811c3338dceb4181f3dbc0c73e",
-    "policy:CARRIER_DELIVERED_AFTER_ESTIMATE"
+    "order:676e40056867189a1b3599f3e646f421",
+    "item:676e40056867189a1b3599f3e646f421:1",
+    "item:676e40056867189a1b3599f3e646f421:2",
+    "payment:676e40056867189a1b3599f3e646f421:1",
+    "seller:38e679b9e0064cd94c6f035707344dae",
+    "policy:ORDER_CANCELED_AFTER_PAYMENT"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 8.22
+    "recommended_refund_brl": 81.48
   },
   "resolution_actions": [
-    "refund_freight",
-    "review_carrier_delay",
+    "issue_full_refund",
     "verify_refund_completion"
   ]
 }

@@ -1,94 +1,100 @@
 {
   "case_id": "EC_018",
   "case_assessment": {
-    "primary_issue": "late_delivery_seller",
-    "secondary_issues": [],
-    "case_status": "action_required",
-    "confidence": 0.97
+    "primary_issue": "unsupported_late_claim",
+    "secondary_issues": [
+      "multi_item_order",
+      "multi_seller_order"
+    ],
+    "case_status": "no_action",
+    "confidence": 0.8
   },
   "affected_entities": {
     "order_ids": [
-      "91bcade2288597459e1dbce52d6d0ef9"
+      "f396e1280028fa9c8c83111abee5f2e9"
     ],
     "item_ids": [
-      "91bcade2288597459e1dbce52d6d0ef9:1"
+      "f396e1280028fa9c8c83111abee5f2e9:1",
+      "f396e1280028fa9c8c83111abee5f2e9:2"
     ],
     "seller_ids": [
-      "79ebd9a61bac3eaf882805ed4ecfa12a"
+      "ccc4bbb5f32a6ab2b7066a4130f114e3",
+      "f7ba60f8c3f99e7ee4042fdef03b70c4"
     ],
     "payment_ids": [
-      "91bcade2288597459e1dbce52d6d0ef9:1"
+      "f396e1280028fa9c8c83111abee5f2e9:1"
     ]
   },
   "customer_context": {
-    "customer_unique_id": "567cce4e47a422c4e6e2021a46c979e7",
+    "customer_unique_id": "664770508f06c0c2fa1c37fed04a6dd7",
     "related_order_ids": []
   },
   "product_context": {
     "product_ids": [
-      "c063e7cfa2a5277de17cde1837399dc5"
+      "6cdd53843498f92890544667809f1595",
+      "9b1954fdd0f9b4ef4ee2d267ac9de4bd"
     ],
     "category_names": [
-      "furniture_decor"
+      "health_beauty"
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "2018-02-09 00:44:50",
-    "estimated_delivery_at": "2018-02-02 00:00:00",
-    "carrier_handoff_at": "2018-01-10 20:24:19",
-    "delivery_variance_hours": 168.75,
+    "delivered_at": "2018-07-23 15:51:06",
+    "estimated_delivery_at": "2018-08-07 00:00:00",
+    "carrier_handoff_at": "2018-07-18 12:06:00",
+    "delivery_variance_hours": -344.15,
     "seller_handoff_analysis": [
       {
-        "seller_id": "79ebd9a61bac3eaf882805ed4ecfa12a",
-        "shipping_limit_at": "2018-01-10 13:29:16",
-        "handoff_variance_hours": 6.92,
-        "late_handoff": true
+        "seller_id": "ccc4bbb5f32a6ab2b7066a4130f114e3",
+        "shipping_limit_at": "2018-07-19 04:31:53",
+        "handoff_variance_hours": -16.43,
+        "late_handoff": false
+      },
+      {
+        "seller_id": "f7ba60f8c3f99e7ee4042fdef03b70c4",
+        "shipping_limit_at": "2018-07-20 04:31:53",
+        "handoff_variance_hours": -40.43,
+        "late_handoff": false
       }
     ],
-    "late_handoff_seller_ids": [
-      "79ebd9a61bac3eaf882805ed4ecfa12a"
-    ]
+    "late_handoff_seller_ids": []
   },
   "payment_reconciliation": {
     "currency": "BRL",
-    "item_total_brl": 124.9,
-    "freight_total_brl": 38.42,
-    "expected_total_brl": 163.32,
-    "payment_total_brl": 163.32,
+    "item_total_brl": 417.0,
+    "freight_total_brl": 38.38,
+    "expected_total_brl": 455.38,
+    "payment_total_brl": 455.38,
     "difference_brl": 0.0,
     "reconciled": true,
     "payment_types": [
-      "credit_card"
+      "boleto"
     ]
   },
   "root_cause_analysis": {
     "ranked_causes": [
       {
-        "cause_code": "SELLER_HANDOFF_AFTER_LIMIT",
+        "cause_code": "DELIVERY_WITHIN_ESTIMATE",
         "rank": 1
       }
     ],
-    "responsible_parties": [
-      {
-        "party_type": "seller",
-        "party_id": "79ebd9a61bac3eaf882805ed4ecfa12a"
-      }
-    ]
+    "responsible_parties": []
   },
   "evidence_ids": [
-    "order:91bcade2288597459e1dbce52d6d0ef9",
-    "item:91bcade2288597459e1dbce52d6d0ef9:1",
-    "payment:91bcade2288597459e1dbce52d6d0ef9:1",
-    "seller:79ebd9a61bac3eaf882805ed4ecfa12a",
-    "policy:SELLER_HANDOFF_AFTER_LIMIT"
+    "order:f396e1280028fa9c8c83111abee5f2e9",
+    "item:f396e1280028fa9c8c83111abee5f2e9:1",
+    "item:f396e1280028fa9c8c83111abee5f2e9:2",
+    "payment:f396e1280028fa9c8c83111abee5f2e9:1",
+    "seller:ccc4bbb5f32a6ab2b7066a4130f114e3",
+    "seller:f7ba60f8c3f99e7ee4042fdef03b70c4",
+    "policy:DELIVERY_WITHIN_ESTIMATE"
   ],
   "financial_resolution": {
     "currency": "BRL",
-    "recommended_refund_brl": 38.42
+    "recommended_refund_brl": 0.0
   },
   "resolution_actions": [
-    "refund_freight",
-    "review_seller_handoff",
-    "verify_refund_completion"
+    "reject_late_refund",
+    "coordinate_multi_seller_case"
   ]
 }
