@@ -48,7 +48,7 @@
       {
         "seller_id": "de23c3b98a88888289c6f5cc1209054a",
         "shipping_limit_at": "2018-03-05 21:48:30",
-        "handoff_variance_hours": -4.19,
+        "handoff_variance_hours": 0.0,
         "late_handoff": false
       }
     ],

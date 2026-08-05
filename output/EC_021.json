@@ -42,18 +42,18 @@
     "delivered_at": "2018-04-30 22:16:47",
     "estimated_delivery_at": "2018-05-29 00:00:00",
     "carrier_handoff_at": "2018-04-23 18:22:46",
-    "delivery_variance_hours": -673.72,
+    "delivery_variance_hours": 0.0,
     "seller_handoff_analysis": [
       {
         "seller_id": "de722cd6dad950a92b7d4f82673f8833",
         "shipping_limit_at": "2018-04-26 17:30:45",
-        "handoff_variance_hours": -71.13,
+        "handoff_variance_hours": 0.0,
         "late_handoff": false
       },
       {
         "seller_id": "1c68394e931a64f90ea236c5ea590300",
         "shipping_limit_at": "2018-05-03 17:30:45",
-        "handoff_variance_hours": -239.13,
+        "handoff_variance_hours": 0.0,
         "late_handoff": false
       }
     ],

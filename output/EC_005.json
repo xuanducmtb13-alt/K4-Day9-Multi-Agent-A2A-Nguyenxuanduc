@@ -47,13 +47,13 @@
       {
         "seller_id": "dc4a0fc896dc34b0d5bfec8438291c80",
         "shipping_limit_at": "2017-11-24 13:37:25",
-        "handoff_variance_hours": -60.74,
+        "handoff_variance_hours": 0.0,
         "late_handoff": false
       },
       {
         "seller_id": "8160255418d5aaa7dbdc9f4c64ebda44",
         "shipping_limit_at": "2017-11-24 13:37:25",
-        "handoff_variance_hours": -60.74,
+        "handoff_variance_hours": 0.0,
         "late_handoff": false
       }
     ],

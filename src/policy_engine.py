@@ -23,6 +23,9 @@ class PolicyEngine:
         if order_status == 'canceled' and payment_total > 0:
             primary_issue = 'canceled_order_paid'
             responsible_parties = [{"party_type": "platform", "party_id": "OLIST_PLATFORM"}]
+            if len(seller_ids) > 0:
+                for s_id in seller_ids[:2]:
+                    responsible_parties.append({"party_type": "seller", "party_id": s_id})
             recommended_refund = payment_total
             primary_action = 'issue_full_refund'
             root_cause_code = 'ORDER_CANCELED_AFTER_PAYMENT'
@@ -31,6 +34,9 @@ class PolicyEngine:
         elif order_status == 'unavailable' and payment_total > 0:
             primary_issue = 'unavailable_order_paid'
             responsible_parties = [{"party_type": "platform", "party_id": "OLIST_PLATFORM"}]
+            if len(seller_ids) > 0:
+                for s_id in seller_ids[:2]:
+                    responsible_parties.append({"party_type": "seller", "party_id": s_id})
             recommended_refund = payment_total
             primary_action = 'issue_full_refund'
             root_cause_code = 'ORDER_UNAVAILABLE_AFTER_PAYMENT'

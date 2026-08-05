@@ -40,10 +40,10 @@
     "currency": "BRL",
     "item_total_brl": 0,
     "freight_total_brl": 0,
-    "expected_total_brl": null,
+    "expected_total_brl": 0.0,
     "payment_total_brl": 138.92,
-    "difference_brl": null,
-    "reconciled": null,
+    "difference_brl": 138.92,
+    "reconciled": false,
     "payment_types": [
       "boleto"
     ]

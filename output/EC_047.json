@@ -45,7 +45,7 @@
       {
         "seller_id": "dbc22125167c298ef99da25668e1011f",
         "shipping_limit_at": "2018-02-23 17:20:52",
-        "handoff_variance_hours": -70.37,
+        "handoff_variance_hours": 0.0,
         "late_handoff": false
       }
     ],
@@ -74,6 +74,10 @@
       {
         "party_type": "platform",
         "party_id": "OLIST_PLATFORM"
+      },
+      {
+        "party_type": "seller",
+        "party_id": "dbc22125167c298ef99da25668e1011f"
       }
     ]
   },
@@ -81,6 +85,7 @@
     "order:2cfc79d9582e9135c0a9b61fa60e6b21",
     "item:2cfc79d9582e9135c0a9b61fa60e6b21:1",
     "payment:2cfc79d9582e9135c0a9b61fa60e6b21:1",
+    "seller:dbc22125167c298ef99da25668e1011f",
     "policy:ORDER_CANCELED_AFTER_PAYMENT"
   ],
   "financial_resolution": {

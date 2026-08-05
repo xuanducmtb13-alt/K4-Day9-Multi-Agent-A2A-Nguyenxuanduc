@@ -62,9 +62,12 @@ class DataEngine:
         cust_info = self.customers_by_id.get(customer_id, {})
         cust_unique_id = cust_info.get('customer_unique_id')
 
-        # Related orders for repeat customer (excluding current order, maintaining chronological order)
+        # Related orders for repeat customer (delivered orders only, maintaining chronological order)
         all_cust_orders = self.orders_by_unique_cust.get(cust_unique_id, [])
-        related_order_ids = [oid for oid in all_cust_orders if oid != claimed_order_id]
+        related_order_ids = [
+            oid for oid in all_cust_orders 
+            if oid != claimed_order_id and self.orders_by_id.get(oid, {}).get('order_status') == 'delivered'
+        ]
 
         # Items (sorted by order_item_id)
         items = self.items_by_order.get(claimed_order_id, [])
@@ -94,7 +97,9 @@ class DataEngine:
         if pd.notna(delivered_at) and pd.notna(estimated_delivery_at):
             dt_del = datetime.strptime(str(delivered_at), "%Y-%m-%d %H:%M:%S")
             dt_est = datetime.strptime(str(estimated_delivery_at), "%Y-%m-%d %H:%M:%S")
-            delivery_variance_hours = round((dt_del - dt_est).total_seconds() / 3600.0, 2)
+            raw_variance = (dt_del - dt_est).total_seconds() / 3600.0
+            # Clamp negative variance to 0.0 if delivered on time or early
+            delivery_variance_hours = round(max(0.0, raw_variance), 2)
 
         # Seller Handoff Analysis
         seller_handoff_analysis = []
@@ -114,8 +119,9 @@ class DataEngine:
             if pd.notna(carrier_handoff_at) and pd.notna(limit_date):
                 dt_carrier = datetime.strptime(str(carrier_handoff_at), "%Y-%m-%d %H:%M:%S")
                 dt_limit = datetime.strptime(str(limit_date), "%Y-%m-%d %H:%M:%S")
-                h_variance = round((dt_carrier - dt_limit).total_seconds() / 3600.0, 2)
-                is_late = h_variance > 0
+                raw_h_variance = (dt_carrier - dt_limit).total_seconds() / 3600.0
+                h_variance = round(max(0.0, raw_h_variance), 2)
+                is_late = raw_h_variance > 0
 
             if is_late:
                 late_handoff_seller_ids.append(s_id)
@@ -133,9 +139,14 @@ class DataEngine:
         payment_total_brl = round(sum(pmt['payment_value'] for pmt in payments), 2)
 
         if len(items) == 0:
-            expected_total_brl = None
-            difference_brl = None
-            reconciled = None
+            if payment_total_brl > 0:
+                expected_total_brl = 0.0
+                difference_brl = payment_total_brl
+                reconciled = False
+            else:
+                expected_total_brl = None
+                difference_brl = None
+                reconciled = None
         else:
             expected_total_brl = round(item_total_brl + freight_total_brl, 2)
             difference_brl = round(payment_total_brl - expected_total_brl, 2)
