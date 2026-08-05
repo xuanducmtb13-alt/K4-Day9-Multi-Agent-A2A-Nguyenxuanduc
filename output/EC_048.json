@@ -6,7 +6,7 @@
       "multi_item_order"
     ],
     "case_status": "no_action",
-    "confidence": 0.7
+    "confidence": 0.8
   },
   "affected_entities": {
     "order_ids": [

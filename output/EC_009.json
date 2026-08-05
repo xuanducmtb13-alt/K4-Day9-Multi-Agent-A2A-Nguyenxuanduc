@@ -4,7 +4,7 @@
     "primary_issue": "unavailable_order_paid",
     "secondary_issues": [],
     "case_status": "action_required",
-    "confidence": 0.98
+    "confidence": 0.99
   },
   "affected_entities": {
     "order_ids": [

@@ -114,11 +114,21 @@ class PolicyEngine:
             evidence_ids.append(f"policy:{root_cause_code}")
 
         # Dynamic confidence calculation
-        confidence = 0.95
-        if primary_issue == 'unsupported_late_claim':
-            confidence = 0.7
-        elif len(late_sellers) > 0 or order_status in ['canceled', 'unavailable']:
-            confidence = 0.98
+        if primary_issue in ['canceled_order_paid', 'unavailable_order_paid']:
+            confidence = 0.99
+        elif primary_issue in ['late_delivery_seller', 'late_delivery_logistics']:
+            if del_var is not None and abs(del_var) > 72:
+                confidence = 0.97
+            elif del_var is not None and abs(del_var) > 24:
+                confidence = 0.94
+            else:
+                confidence = 0.90
+        elif primary_issue == 'valid_split_payment':
+            confidence = 0.93
+        elif primary_issue == 'unsupported_late_claim':
+            confidence = 0.80
+        else:
+            confidence = 0.95
 
         # Assemble Output Schema according to strict rules
         output_schema = {
