@@ -1,0 +1,94 @@
+{
+  "case_id": "EC_019",
+  "case_assessment": {
+    "primary_issue": "late_delivery_seller",
+    "secondary_issues": [],
+    "case_status": "action_required",
+    "confidence": 0.95
+  },
+  "affected_entities": {
+    "order_ids": [
+      "d30680568af2e9f0aeba3420292df26d"
+    ],
+    "item_ids": [
+      "d30680568af2e9f0aeba3420292df26d:1"
+    ],
+    "seller_ids": [
+      "633ecdf879b94b5337cca303328e4a25"
+    ],
+    "payment_ids": [
+      "d30680568af2e9f0aeba3420292df26d:1"
+    ]
+  },
+  "customer_context": {
+    "customer_unique_id": "dcf468beeda4b0ec3079e3e6b462fa51",
+    "related_order_ids": []
+  },
+  "product_context": {
+    "product_ids": [
+      "5ac9d9e379c606e36a8094a6046f75dc"
+    ],
+    "category_names": [
+      "health_beauty"
+    ]
+  },
+  "delivery_analysis": {
+    "delivered_at": "2017-10-22 14:16:51",
+    "estimated_delivery_at": "2017-10-09 00:00:00",
+    "carrier_handoff_at": "2017-09-22 20:45:53",
+    "delivery_variance_hours": 326.28,
+    "seller_handoff_analysis": [
+      {
+        "seller_id": "633ecdf879b94b5337cca303328e4a25",
+        "shipping_limit_at": "2017-09-21 09:35:12",
+        "handoff_variance_hours": 35.18,
+        "late_handoff": true
+      }
+    ],
+    "late_handoff_seller_ids": [
+      "633ecdf879b94b5337cca303328e4a25"
+    ]
+  },
+  "payment_reconciliation": {
+    "currency": "BRL",
+    "item_total_brl": 109.9,
+    "freight_total_brl": 16.21,
+    "expected_total_brl": 126.11,
+    "payment_total_brl": 126.11,
+    "difference_brl": 0.0,
+    "reconciled": true,
+    "payment_types": [
+      "credit_card"
+    ]
+  },
+  "root_cause_analysis": {
+    "ranked_causes": [
+      {
+        "cause_code": "SELLER_HANDOFF_AFTER_LIMIT",
+        "rank": 1
+      }
+    ],
+    "responsible_parties": [
+      {
+        "party_type": "seller",
+        "party_id": "633ecdf879b94b5337cca303328e4a25"
+      }
+    ]
+  },
+  "evidence_ids": [
+    "order:d30680568af2e9f0aeba3420292df26d",
+    "item:d30680568af2e9f0aeba3420292df26d:1",
+    "payment:d30680568af2e9f0aeba3420292df26d:1",
+    "seller:633ecdf879b94b5337cca303328e4a25",
+    "policy:SELLER_HANDOFF_AFTER_LIMIT"
+  ],
+  "financial_resolution": {
+    "currency": "BRL",
+    "recommended_refund_brl": 16.21
+  },
+  "resolution_actions": [
+    "refund_freight",
+    "review_seller_handoff",
+    "verify_refund_completion"
+  ]
+}

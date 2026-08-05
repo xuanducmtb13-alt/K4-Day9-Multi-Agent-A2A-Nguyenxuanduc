@@ -1,0 +1,94 @@
+{
+  "case_id": "EC_018",
+  "case_assessment": {
+    "primary_issue": "late_delivery_seller",
+    "secondary_issues": [],
+    "case_status": "action_required",
+    "confidence": 0.95
+  },
+  "affected_entities": {
+    "order_ids": [
+      "91bcade2288597459e1dbce52d6d0ef9"
+    ],
+    "item_ids": [
+      "91bcade2288597459e1dbce52d6d0ef9:1"
+    ],
+    "seller_ids": [
+      "79ebd9a61bac3eaf882805ed4ecfa12a"
+    ],
+    "payment_ids": [
+      "91bcade2288597459e1dbce52d6d0ef9:1"
+    ]
+  },
+  "customer_context": {
+    "customer_unique_id": "567cce4e47a422c4e6e2021a46c979e7",
+    "related_order_ids": []
+  },
+  "product_context": {
+    "product_ids": [
+      "c063e7cfa2a5277de17cde1837399dc5"
+    ],
+    "category_names": [
+      "furniture_decor"
+    ]
+  },
+  "delivery_analysis": {
+    "delivered_at": "2018-02-09 00:44:50",
+    "estimated_delivery_at": "2018-02-02 00:00:00",
+    "carrier_handoff_at": "2018-01-10 20:24:19",
+    "delivery_variance_hours": 168.75,
+    "seller_handoff_analysis": [
+      {
+        "seller_id": "79ebd9a61bac3eaf882805ed4ecfa12a",
+        "shipping_limit_at": "2018-01-10 13:29:16",
+        "handoff_variance_hours": 6.92,
+        "late_handoff": true
+      }
+    ],
+    "late_handoff_seller_ids": [
+      "79ebd9a61bac3eaf882805ed4ecfa12a"
+    ]
+  },
+  "payment_reconciliation": {
+    "currency": "BRL",
+    "item_total_brl": 124.9,
+    "freight_total_brl": 38.42,
+    "expected_total_brl": 163.32,
+    "payment_total_brl": 163.32,
+    "difference_brl": 0.0,
+    "reconciled": true,
+    "payment_types": [
+      "credit_card"
+    ]
+  },
+  "root_cause_analysis": {
+    "ranked_causes": [
+      {
+        "cause_code": "SELLER_HANDOFF_AFTER_LIMIT",
+        "rank": 1
+      }
+    ],
+    "responsible_parties": [
+      {
+        "party_type": "seller",
+        "party_id": "79ebd9a61bac3eaf882805ed4ecfa12a"
+      }
+    ]
+  },
+  "evidence_ids": [
+    "order:91bcade2288597459e1dbce52d6d0ef9",
+    "item:91bcade2288597459e1dbce52d6d0ef9:1",
+    "payment:91bcade2288597459e1dbce52d6d0ef9:1",
+    "seller:79ebd9a61bac3eaf882805ed4ecfa12a",
+    "policy:SELLER_HANDOFF_AFTER_LIMIT"
+  ],
+  "financial_resolution": {
+    "currency": "BRL",
+    "recommended_refund_brl": 38.42
+  },
+  "resolution_actions": [
+    "refund_freight",
+    "review_seller_handoff",
+    "verify_refund_completion"
+  ]
+}
