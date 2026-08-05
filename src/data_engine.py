@@ -40,11 +40,13 @@ class DataEngine:
         # Map products by product_id
         self.products_by_id = self.df_products.set_index('product_id').to_dict('index')
 
-        # Map customer_unique_id to related order_ids (preserving order_purchase_timestamp order)
+        # Map customer_unique_id to related order_ids (sorted by order_purchase_timestamp ascending)
         self.orders_by_unique_cust = {}
         cust_map = self.df_customers.set_index('customer_id')['customer_unique_id'].to_dict()
-        for oid, o_row in self.orders_by_id.items():
-            cid = o_row['customer_id']
+        df_orders_sorted = self.df_orders.sort_values('order_purchase_timestamp')
+        for row in df_orders_sorted.to_dict('records'):
+            oid = row['order_id']
+            cid = row['customer_id']
             uniq_id = cust_map.get(cid)
             if uniq_id:
                 self.orders_by_unique_cust.setdefault(uniq_id, []).append(oid)
@@ -60,16 +62,16 @@ class DataEngine:
         cust_info = self.customers_by_id.get(customer_id, {})
         cust_unique_id = cust_info.get('customer_unique_id')
 
-        # Related orders for repeat customer (excluding current order)
+        # Related orders for repeat customer (excluding current order, maintaining chronological order)
         all_cust_orders = self.orders_by_unique_cust.get(cust_unique_id, [])
         related_order_ids = [oid for oid in all_cust_orders if oid != claimed_order_id]
 
-        # Items
+        # Items (sorted by order_item_id)
         items = self.items_by_order.get(claimed_order_id, [])
         item_ids = [f"{claimed_order_id}:{it['order_item_id']}" for it in items]
         seller_ids = list(dict.fromkeys([it['seller_id'] for it in items]))
 
-        # Products and categories
+        # Products and categories (preserving CSV order, omitting NaN/null)
         product_ids = list(dict.fromkeys([it['product_id'] for it in items]))
         category_names = []
         for pid in product_ids:
@@ -78,7 +80,7 @@ class DataEngine:
             if cat and pd.notna(cat) and str(cat).lower() != 'nan' and cat not in category_names:
                 category_names.append(cat)
 
-        # Payments
+        # Payments (sorted by payment_sequential)
         payments = self.payments_by_order.get(claimed_order_id, [])
         payment_ids = [f"{claimed_order_id}:{pmt['payment_sequential']}" for pmt in payments]
         payment_types = list(dict.fromkeys([pmt['payment_type'] for pmt in payments]))
