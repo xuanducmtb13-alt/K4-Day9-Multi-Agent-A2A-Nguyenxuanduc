@@ -64,8 +64,16 @@ def main():
     with open('logging/metadata.json', 'w', encoding='utf-8') as f:
         json.dump(metadata, f, ensure_ascii=False, indent=2)
 
+    # Automatically package output.zip with output/ folder prefix
+    import zipfile
+    out_files = sorted(glob.glob('output/EC_*.json'))
+    with zipfile.ZipFile('output.zip', 'w', zipfile.ZIP_DEFLATED) as zipf:
+        for f in out_files:
+            zipf.write(f, arcname=os.path.join('output', os.path.basename(f)))
+
     print(f"Successfully processed {len(input_files)} cases.")
     print("Outputs written to 'output/'")
+    print("Packaged 50 files into 'output.zip' (wrapped in output/ folder)")
     print("Trace written to 'trace.jsonl' and 'logging/trace.jsonl'")
     print("Metadata written to 'metadata.json'")
 
