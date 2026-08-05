@@ -7,7 +7,7 @@
       "repeat_customer"
     ],
     "case_status": "action_required",
-    "confidence": 0.97
+    "confidence": 0.95
   },
   "affected_entities": {
     "order_ids": [
@@ -86,7 +86,6 @@
     "item:3c5939ce763419f5942f27acffd072e6:2",
     "item:3c5939ce763419f5942f27acffd072e6:3",
     "payment:3c5939ce763419f5942f27acffd072e6:1",
-    "seller:8fec2e460530482132c436cfb5439925",
     "policy:CARRIER_DELIVERED_AFTER_ESTIMATE"
   ],
   "financial_resolution": {

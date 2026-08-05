@@ -25,22 +25,22 @@ class DataEngine:
         self.orders_by_id = self.df_orders.set_index('order_id').to_dict('index')
         self.customers_by_id = self.df_customers.set_index('customer_id').to_dict('index')
         
-        # Group items by order_id
+        # Group items by order_id (sorted by order_item_id)
         self.items_by_order = {}
-        for row in self.df_items.to_dict('records'):
+        for row in self.df_items.sort_values(['order_id', 'order_item_id']).to_dict('records'):
             oid = row['order_id']
             self.items_by_order.setdefault(oid, []).append(row)
 
-        # Group payments by order_id
+        # Group payments by order_id (sorted by payment_sequential)
         self.payments_by_order = {}
-        for row in self.df_payments.to_dict('records'):
+        for row in self.df_payments.sort_values(['order_id', 'payment_sequential']).to_dict('records'):
             oid = row['order_id']
             self.payments_by_order.setdefault(oid, []).append(row)
 
         # Map products by product_id
         self.products_by_id = self.df_products.set_index('product_id').to_dict('index')
 
-        # Map customer_unique_id to related order_ids
+        # Map customer_unique_id to related order_ids (preserving order_purchase_timestamp order)
         self.orders_by_unique_cust = {}
         cust_map = self.df_customers.set_index('customer_id')['customer_unique_id'].to_dict()
         for oid, o_row in self.orders_by_id.items():
@@ -75,7 +75,7 @@ class DataEngine:
         for pid in product_ids:
             p_info = self.products_by_id.get(pid, {})
             cat = p_info.get('category_english')
-            if cat and cat not in category_names:
+            if cat and pd.notna(cat) and str(cat).lower() != 'nan' and cat not in category_names:
                 category_names.append(cat)
 
         # Payments
@@ -103,7 +103,7 @@ class DataEngine:
         for it in items:
             s_id = it['seller_id']
             limit_date = it['shipping_limit_date']
-            if s_id not in seller_shipping_limits or limit_date < seller_shipping_limits[s_id]:
+            if s_id not in seller_shipping_limits or (pd.notna(limit_date) and limit_date < seller_shipping_limits[s_id]):
                 seller_shipping_limits[s_id] = limit_date
 
         for s_id, limit_date in seller_shipping_limits.items():

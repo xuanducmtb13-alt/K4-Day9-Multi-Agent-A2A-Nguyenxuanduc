@@ -8,7 +8,7 @@
       "repeat_customer"
     ],
     "case_status": "no_action",
-    "confidence": 0.93
+    "confidence": 0.92
   },
   "affected_entities": {
     "order_ids": [
@@ -87,7 +87,6 @@
     "item:ca0400dec2c292340c373e63b1c2c597:4",
     "payment:ca0400dec2c292340c373e63b1c2c597:1",
     "payment:ca0400dec2c292340c373e63b1c2c597:2",
-    "seller:751bdc4d83a466c7206cd42e8f426b03",
     "policy:MULTIPLE_PAYMENTS_RECONCILED"
   ],
   "financial_resolution": {

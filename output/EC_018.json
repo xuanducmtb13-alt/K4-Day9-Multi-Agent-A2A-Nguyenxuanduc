@@ -7,7 +7,7 @@
       "multi_seller_order"
     ],
     "case_status": "no_action",
-    "confidence": 0.8
+    "confidence": 0.9
   },
   "affected_entities": {
     "order_ids": [
@@ -85,8 +85,6 @@
     "item:f396e1280028fa9c8c83111abee5f2e9:1",
     "item:f396e1280028fa9c8c83111abee5f2e9:2",
     "payment:f396e1280028fa9c8c83111abee5f2e9:1",
-    "seller:ccc4bbb5f32a6ab2b7066a4130f114e3",
-    "seller:f7ba60f8c3f99e7ee4042fdef03b70c4",
     "policy:DELIVERY_WITHIN_ESTIMATE"
   ],
   "financial_resolution": {

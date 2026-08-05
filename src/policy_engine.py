@@ -18,7 +18,6 @@ class PolicyEngine:
         recommended_refund = 0.0
         primary_action = None
         root_cause_code = None
-        case_status = "action_required"
 
         # 1. Canceled order paid
         if order_status == 'canceled' and payment_total > 0:
@@ -27,7 +26,6 @@ class PolicyEngine:
             recommended_refund = payment_total
             primary_action = 'issue_full_refund'
             root_cause_code = 'ORDER_CANCELED_AFTER_PAYMENT'
-            case_status = 'action_required'
 
         # 2. Unavailable order paid
         elif order_status == 'unavailable' and payment_total > 0:
@@ -36,7 +34,6 @@ class PolicyEngine:
             recommended_refund = payment_total
             primary_action = 'issue_full_refund'
             root_cause_code = 'ORDER_UNAVAILABLE_AFTER_PAYMENT'
-            case_status = 'action_required'
 
         # 3. Late delivery seller
         elif del_var is not None and del_var > 0 and len(late_sellers) > 0:
@@ -45,7 +42,6 @@ class PolicyEngine:
             recommended_refund = ctx['freight_total_brl']
             primary_action = 'refund_freight'
             root_cause_code = 'SELLER_HANDOFF_AFTER_LIMIT'
-            case_status = 'action_required'
 
         # 4. Late delivery logistics
         elif del_var is not None and del_var > 0 and len(late_sellers) == 0:
@@ -54,7 +50,6 @@ class PolicyEngine:
             recommended_refund = ctx['freight_total_brl']
             primary_action = 'refund_freight'
             root_cause_code = 'CARRIER_DELIVERED_AFTER_ESTIMATE'
-            case_status = 'action_required'
 
         # 5. Valid split payment
         elif len(payments) >= 2 and reconciled is True:
@@ -63,7 +58,6 @@ class PolicyEngine:
             recommended_refund = 0.0
             primary_action = 'explain_valid_split_payment'
             root_cause_code = 'MULTIPLE_PAYMENTS_RECONCILED'
-            case_status = 'no_action'
 
         # 6. Unsupported late claim / Default
         else:
@@ -72,7 +66,9 @@ class PolicyEngine:
             recommended_refund = 0.0
             primary_action = 'reject_late_refund'
             root_cause_code = 'DELIVERY_WITHIN_ESTIMATE'
-            case_status = 'no_action'
+
+        recommended_refund = round(recommended_refund, 2)
+        case_status = "action_required" if recommended_refund > 0 else "no_action"
 
         # Evaluate secondary issues in exact order
         secondary_issues = []
@@ -101,32 +97,28 @@ class PolicyEngine:
         if 'split_payment' in secondary_issues and primary_issue != 'valid_split_payment':
             resolution_actions.append('verify_payment_allocation')
 
-        # Evidence IDs
+        # Evidence IDs (Only responsible sellers if any)
         oid = ctx['order_id']
         evidence_ids = [f"order:{oid}"]
         for it_id in ctx['item_ids']:
             evidence_ids.append(f"item:{it_id}")
         for pmt_id in ctx['payment_ids']:
             evidence_ids.append(f"payment:{pmt_id}")
-        for s_id in ctx['seller_ids']:
-            evidence_ids.append(f"seller:{s_id}")
+        for rp in responsible_parties:
+            if rp['party_type'] == 'seller':
+                evidence_ids.append(f"seller:{rp['party_id']}")
         if root_cause_code:
             evidence_ids.append(f"policy:{root_cause_code}")
 
         # Dynamic confidence calculation
         if primary_issue in ['canceled_order_paid', 'unavailable_order_paid']:
-            confidence = 0.99
+            confidence = 0.98
         elif primary_issue in ['late_delivery_seller', 'late_delivery_logistics']:
-            if del_var is not None and abs(del_var) > 72:
-                confidence = 0.97
-            elif del_var is not None and abs(del_var) > 24:
-                confidence = 0.94
-            else:
-                confidence = 0.90
+            confidence = 0.95
         elif primary_issue == 'valid_split_payment':
-            confidence = 0.93
+            confidence = 0.92
         elif primary_issue == 'unsupported_late_claim':
-            confidence = 0.80
+            confidence = 0.90
         else:
             confidence = 0.95
 
@@ -180,7 +172,7 @@ class PolicyEngine:
             "evidence_ids": evidence_ids[:20],
             "financial_resolution": {
                 "currency": "BRL",
-                "recommended_refund_brl": round(recommended_refund, 2)
+                "recommended_refund_brl": recommended_refund
             },
             "resolution_actions": resolution_actions[:5]
         }

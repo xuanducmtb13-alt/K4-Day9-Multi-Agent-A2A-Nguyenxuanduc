@@ -6,7 +6,7 @@
       "multi_item_order"
     ],
     "case_status": "action_required",
-    "confidence": 0.99
+    "confidence": 0.98
   },
   "affected_entities": {
     "order_ids": [
@@ -81,7 +81,6 @@
     "item:5d9c5817e278892b7498d90bfa28ade8:1",
     "item:5d9c5817e278892b7498d90bfa28ade8:2",
     "payment:5d9c5817e278892b7498d90bfa28ade8:1",
-    "seller:340636a908b13bbe0f4fb63fbe1d0c03",
     "policy:ORDER_CANCELED_AFTER_PAYMENT"
   ],
   "financial_resolution": {
